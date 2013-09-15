@@ -27,4 +27,4 @@ TARGET_RECOVERY_FSTAB := device/wiko/stairway/recovery/recovery.fstab
 BOARD_HAS_NO_SELECT_BUTTON := true
 
 TARGET_NO_BOOTLOADER := true
-TARGET_PREBUILT_KERNEL := device/wiko/stairway/kernel
+TARGET_PREBUILT_RECOVERY_KERNEL := device/wiko/stairway/recovery/kernel
