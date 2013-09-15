@@ -23,7 +23,6 @@ BOARD_KERNEL_PAGESIZE := 2048
 BOARD_FLASH_BLOCK_SIZE := 4096
 
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 6291456
-TARGET_RECOVERY_INITRC := device/wiko/stairway/recovery/init.rc
 TARGET_RECOVERY_FSTAB := device/wiko/stairway/recovery/recovery.fstab
 BOARD_HAS_NO_SELECT_BUTTON := true
 
