@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+DEVICE_FOLDER := device/wiko/stairway
+
 TARGET_ARCH := arm
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
@@ -23,9 +25,12 @@ TARGET_NO_BOOTLOADER := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 6291456
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_FLASH_BLOCK_SIZE := 4096
-TARGET_PREBUILT_KERNEL := device/wiko/stairway/recovery/kernel
+# TODO: temporarily point to recovery to avoid build break
+TARGET_PREBUILT_KERNEL := $(DEVICE_FOLDER)/recovery/kernel
 
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 6291456
-TARGET_RECOVERY_FSTAB := device/wiko/stairway/recovery/recovery.fstab
-TARGET_PREBUILT_RECOVERY_KERNEL := device/wiko/stairway/recovery/kernel
+TARGET_RECOVERY_FSTAB := $(DEVICE_FOLDER)/recovery/recovery.fstab
+TARGET_PREBUILT_RECOVERY_KERNEL := $(DEVICE_FOLDER)/recovery/kernel
 BOARD_HAS_NO_SELECT_BUTTON := true
+
+BOARD_CUSTOM_BOOTIMG_MK := $(DEVICE_FOLDER)/boot.mk
