@@ -45,7 +45,6 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/root/ueventd.mt6589.rc:root/ueventd.mt6589.rc \
 	$(LOCAL_PATH)/root/init.mt6589.rc:root/init.mt6589.rc
 
-# Propertys spacific for this device
 PRODUCT_PROPERTY_OVERRIDES := \
 	ro.opengles.version=131072 \
 	ro.mediatek.version.release=ALPS.JB2.MP.V1.2 \
@@ -54,8 +53,6 @@ PRODUCT_PROPERTY_OVERRIDES := \
 	ro.mediatek.version.branch=ALPS.JB2.MP \
 	ro.mediatek.version.sdk=1
 
-# This device have enough room for precise davick
 PRODUCT_TAGS += dalvik.gc.type-precise
 
-# Inherit tablet dalvik settings
 $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
