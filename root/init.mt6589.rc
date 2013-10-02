@@ -1,0 +1,305 @@
+
+on early-init
+    mount debugfs /sys/kernel/debug /sys/kernel/debug
+
+on init  
+    # See storage config details at http://source.android.com/tech/storage/
+    mkdir /mnt/shell/emulated 0700 shell shell
+    mkdir /storage 0050 system sdcard_r
+   
+    mkdir /storage/sdcard0 0000 system system
+    mkdir /storage/sdcard1 0000 system system
+    mkdir /storage/usbdisk0 0000 system system
+    mkdir /cache 0771 system cache
+    
+    # Change ION driver permission
+    chmod 0644 /dev/ion
+
+    # Change MMP driver permission
+    chmod 0644 /dev/mmp
+
+    # change lk_env permission
+    chown root system /proc/lk_env
+    chmod 0660 /proc/lk_env
+
+on fs
+    mount_all /fstab.mt6589
+    setprop service.adb.root 1
+
+on post-fs-data
+    # we will remap this as /mnt/sdcard with the sdcard fuse tool
+    mkdir /data/media 0775 media_rw media_rw
+    chown media_rw media_rw /data/media
+    setprop vold.post_fs_data_done 1
+
+    # create dalvik-cache and double-check the perms, so as to enforce our permissions
+    mkdir /data/dalvik-cache 0771 system system
+    chown system system /data/dalvik-cache
+    chmod 0771 /data/dalvik-cache
+                
+    mkdir /cache/dalvik-cache 0771 system system
+    chown system system /cache/dalvik-cache
+    chmod 0771 /cache/dalvik-cache
+ 
+    mkdir /data/nvram 0770 root nvram
+
+    # radvd
+    mkdir /data/misc/radvd 0770 system system
+    chmod 444 /etc/radvd/radvd.conf
+
+    # SGX
+    insmod /system/lib/modules/pvrsrvkm.ko
+    insmod /system/lib/modules/mtklfb.ko
+
+    # Permissions for System Server and daemons.
+    chown root   radio  /sys/class/leds/lcd-backlight/brightness
+    chown root   radio  /sys/class/leds/lcd-backlight/duty
+    chown root   radio  /sys/class/leds/lcd-backlight/div
+
+    # Touch Panel
+    chmod 0664 /dev/touch
+    chown root diag /sys/module/tpd_setting/parameters/tpd_calmat
+    chown root diag /sys/module/tpd_setting/parameters/tpd_em_debounce_time
+    chown root diag /sys/module/tpd_setting/parameters/tpd_mode
+    chown root diag /sys/module/tpd_setting/parameters/tpd_em_debounce_time0
+    chown root diag /sys/module/tpd_setting/parameters/tpd_em_debounce_time1
+    chown root diag /sys/module/tpd_setting/parameters/tpd_em_spl_num
+    chown root diag /sys/module/tpd_setting/parameters/tpd_em_pressure_threshold
+    chown root diag /sys/module/tpd_setting/parameters/tpd_em_auto_time_interval
+    chown root diag /sys/module/tpd_setting/parameters/tpd_em_sample_cnt
+    chown root diag /sys/module/tpd_setting/parameters/tpd_em_asamp
+    chown root diag /sys/module/tpd_debug/parameters/tpd_em_log
+    chown root diag /sys/module/tpd_debug/parameters/tpd_em_log_to_fs
+
+    chmod 0660 /dev/pmem_multimedia
+    chown system media /dev/pmem_multimedia
+
+    # watch dog kicker
+    write /proc/wdk "0 20 30"
+
+    # set ptmx group to non-root
+    chown root radio /dev/ptmx
+
+    # RTC
+    mkdir /data/misc/rtc 0770 system system
+
+    # M4U
+    #insmod /system/lib/modules/m4u.ko
+    #mknod /dev/M4U_device c 188 0
+    chmod 0444 /dev/M4U_device
+    #chown system media /dev/M4U_device
+
+    # Sensor
+    chmod 0660 /dev/hwmsensor
+    chmod 0660 /dev/msensor
+    chmod 0660 /dev/gsensor
+    chmod 0660 /dev/als_ps
+    chmod 0660 /dev/gyroscope
+
+    chmod 0660 /sys/devices/platform/msensor/driver/cpsopmode
+    chmod 0660 /sys/devices/platform/msensor/driver/cpsreptxy
+    chmod 0660 /sys/devices/platform/msensor/driver/cpsreptz
+
+    # GesturePorting Jiangde++, for gsensor no early suspend
+    # chmod 0777  /sys/devices/platform/gsensor/driver/noearly
+    chown system /sys/devices/platform/gsensor/driver/noearly
+
+    chown system system /dev/hwmsensor
+    chown system system /dev/msensor
+    chown system system /dev/gsensor
+    chown system system /dev/als_ps
+    chown system system /dev/gyroscope
+
+    #Accdet
+    chown root radio /sys/devices/platform/Accdet_Driver/driver/accdet_call_state
+    #VideoCodec
+    insmod /system/lib/modules/vcodec_kernel_driver.ko
+    mknod /dev/Vcodec c 160 0
+    chmod 0660 /dev/Vcodec
+    chown system media /dev/Vcodec
+
+    #kpd
+    chown radio radio /sys/devices/platform/mtk-kpd/driver/kpd_call_state
+
+    mkdir /data/amit/ 0770 system system
+    mkdir /data/misc/sensors 0664 system system
+    mkdir /data/misc/akmd 0664 system system
+    chown system /sys/class/input/input5/enable
+    chown system /sys/class/input/input5/delay
+    chown system /sys/class/input/input5/wake
+    chown system /sys/class/input/input3/enable
+    chown system /sys/class/input/input3/wake
+    chown system /sys/class/input/input4/offsets
+    chown system /sys/class/input/input4/dynamic_matrix
+    chown system /sys/devices/platform/msensor/driver/cpsopmode
+    chown system /sys/devices/platform/msensor/driver/cpsreptxy
+    chown system /sys/devices/platform/msensor/driver/cpsreptz
+
+    # GPIO
+    chmod 0664 /dev/mtgpio
+
+    # SPM SODI Enable
+    chown media /proc/mcdi/sodi_en
+    chmod 0664 /proc/mcdi/sodi_en
+
+    #EM eint
+    chown root diag /sys/bus/platform/drivers/eint/current_eint
+
+    chmod 0660 /dev/graphics/fb0
+    chown system graphics /dev/graphics/fb0
+
+    chmod 0660 /dev/mtkfb_vsync
+    chown system graphics /dev/mtkfb_vsync
+
+    chmod 0660 /dev/sw_sync
+    chown system graphics /dev/sw_sync
+
+    # EM baseband file
+    chown root diag /system/bin/baseband_regdump
+    chmod 4750 /system/bin/baseband_regdump
+
+    #pmu
+    chown root radio /sys/devices/platform/mt-pmic/pmic_access
+    chmod 0664 /sys/devices/platform/mt-pmic/pmic_access
+
+    # EM CPU Speed Stress
+    chown root radio /proc/cpu_ss/cpu_ss_debug_mode
+    chown root radio /proc/cpu_ss/cpu_ss_mode
+    chown root radio /proc/cpu_ss/cpu_ss_period
+    chown root radio /proc/cpu_ss/cpu_ss_period_mode
+    chmod 0664 /proc/cpu_ss/cpu_ss_debug_mode
+    chmod 0664 /proc/cpu_ss/cpu_ss_mode
+    chmod 0664 /proc/cpu_ss/cpu_ss_period
+    chmod 0664 /proc/cpu_ss/cpu_ss_period_mode
+
+    #EM eint
+    chown root diag /sys/bus/platform/drivers/eint/current_eint
+
+    # for ppp options file
+    mkdir /data/misc/ppp 0770 bluetooth net_bt
+
+    # Android SEC related device nodes
+    insmod /system/lib/modules/sec.ko
+    mknod /dev/sec c 182 0
+    chmod 0660 /dev/sec
+    chown root system /dev/sec
+
+    # FM Radio device node
+    mknod /dev/fm     c 193 0;
+    chmod 0660 /dev/fm
+    chown system media /dev/fm
+
+    # device apc settings
+    insmod /system/lib/modules/devapc.ko
+
+    # device info /proc interface
+    insmod /system/lib/modules/devinfo.ko
+    mknod /dev/devmap c 196 0;
+    chmod 0444 /dev/devmap
+    chown root media /dev/devmap
+
+    # bluetooth
+    mkdir /data/@btmtk 0770 bluetooth net_bt
+    chown bluetooth bluetooth /dev/hid-keyboard
+    chmod 0660 /dev/hid-keyboard
+    chown bluetooth bluetooth /dev/btn
+    chmod 0660 /dev/btn
+    #Use uinput's default permission
+    chown system net_bt_admin /dev/uinput
+
+    #TV-out
+    chmod 0664 /dev/TV-out
+
+    #External Display Service
+    chmod 0664 /dev/ext_display
+
+    #HDMI
+    chmod 0664 /dev/hdmitx
+
+    # JPEG
+    chmod 0444 /dev/mtk_jpeg
+    chmod 0444 /dev/mtk_gdma
+    chmod 0444 /dev/mtk_gfmt
+    chmod 0444 /dev/mtk_almk
+
+    # DISP
+    chmod 0444 /dev/mtk_disp
+
+    #Camera
+    chmod 0664 /dev/camera-sysram
+    chmod 0664 /dev/camera-isp
+    chmod 0664 /dev/camera-pipemgr
+    chmod 0660 /dev/kd_camera_hw
+    chmod 0660 /dev/kd_camera_flashlight
+    chmod 0660 /dev/kd_camera_hw_bus2
+    chmod 0660 /dev/FM50AF
+    chmod 0660 /dev/CAM_CAL_DRV
+
+    chown system camera /dev/camera-sysram
+    chown system camera /dev/camera-isp
+    chown system camera /dev/camera-pipemgr
+    chown system camera /dev/kd_camera_hw
+    chown system camera /dev/kd_camera_flashlight
+    chown system camera /dev/kd_camera_hw_bus2
+    chown system camera /dev/FM50AF
+    chown system camera /dev/CAM_CAL_DRV
+
+    #MATV
+    chmod 0660 /dev/MATV
+    chown system media /dev/MATV
+
+    # otg_test
+    chown root radio /dev/mt_otg_test
+    chmod 0660 /dev/mt_otg_test
+
+    # MDP
+    chmod 0660 /dev/mt-mdp
+    chown system media /dev/mt-mdp
+
+    # G2D
+    chmod 0660 /dev/mtkg2d
+    chown system media /dev/mtkg2d
+
+    #for eng mode
+    chmod 0664 /dev/misc-sd
+
+    chmod 0660 /sys/bus/platform/drivers/mem_bw_ctrl/concurrency_scenario
+    chown system media /sys/bus/platform/drivers/mem_bw_ctrl/concurrency_scenario
+
+    # SMI
+    chmod 0660 /dev/MTK_SMI
+    chown system media /dev/MTK_SMI
+
+    #mtk_sched
+    chmod 0660 /dev/mtk_sched
+    chown system media /dev/mtk_sched
+
+# Restart adbd so it can run as root
+on property:service.adb.root=1
+    write /sys/class/android_usb/android0/enable 0
+    restart adbd
+    write /sys/class/android_usb/android0/enable 1
+
+# SGX init
+service pvrsrvctl /system/vendor/bin/pvrsrvctl --start
+    class main
+    user root
+    group root
+    oneshot
+
+service nvram_daemon /system/bin/nvram_daemon
+    class main
+    user nvram
+    group nvram system
+    oneshot
+
+service pq /system/bin/pq
+    class main
+    user system
+    group system graphics
+    oneshot
+
+service mtkGD /system/bin/mtkGD
+    class main
+    user system
+    group system

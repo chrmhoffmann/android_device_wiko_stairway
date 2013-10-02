@@ -1,0 +1,5 @@
+#
+# system.prop for stairway
+#
+
+ro.sf.lcd_density=160
