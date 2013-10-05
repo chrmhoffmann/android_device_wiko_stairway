@@ -12,6 +12,14 @@ on init
     mkdir /storage/usbdisk0 0000 system system
     mkdir /cache 0771 system cache
     
+    symlink /storage/sdcard0 /mnt/emmc
+    symlink /storage/sdcard0 /emmc
+    symlink /storage/sdcard1 /sdcard
+    symlink /storage/sdcard1 /mnt/sdcard
+
+    export EXTERNAL_STORAGE /storage/sdcard1
+    export SECONDARY_STORAGE /storage/sdcard0
+
     # Change ION driver permission
     chmod 0644 /dev/ion
 
@@ -114,7 +122,7 @@ on post-fs-data
     chown root radio /sys/devices/platform/Accdet_Driver/driver/accdet_call_state
     #VideoCodec
     insmod /system/lib/modules/vcodec_kernel_driver.ko
-    mknod /dev/Vcodec c 160 0
+    exec /system/xbin/mknod /dev/Vcodec c 160 0
     chmod 0660 /dev/Vcodec
     chown system media /dev/Vcodec
 
@@ -180,12 +188,12 @@ on post-fs-data
 
     # Android SEC related device nodes
     insmod /system/lib/modules/sec.ko
-    mknod /dev/sec c 182 0
+    exec /system/xbin/mknod /dev/sec c 182 0
     chmod 0660 /dev/sec
     chown root system /dev/sec
 
     # FM Radio device node
-    mknod /dev/fm     c 193 0;
+    exec /system/xbin/mknod /dev/fm     c 193 0
     chmod 0660 /dev/fm
     chown system media /dev/fm
 
@@ -194,7 +202,7 @@ on post-fs-data
 
     # device info /proc interface
     insmod /system/lib/modules/devinfo.ko
-    mknod /dev/devmap c 196 0;
+    exec /system/xbin/mknod /dev/devmap c 196 0
     chmod 0444 /dev/devmap
     chown root media /dev/devmap
 

@@ -31,7 +31,7 @@ BOARD_FLASH_BLOCK_SIZE := 512
 # EGL settings
 BOARD_EGL_CFG := device/wiko/stairway/egl.cfg
 USE_OPENGL_RENDERER := true
-BOARD_EGL_NEEDS_LEGACY_FB := true
+# BOARD_EGL_NEEDS_LEGACY_FB := true
 
 TARGET_PREBUILT_KERNEL := $(DEVICE_FOLDER)/prebuilt/kernel
 

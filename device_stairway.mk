@@ -39,7 +39,8 @@ PRODUCT_COPY_FILES += \
 	$(MOD_SRC)/wlan_mt6628.ko:$(MOD_TGT)/wlan_mt6628.ko
 
 PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/root/fstab.mt6589:root/fstab.mt6589
+	$(LOCAL_PATH)/root/fstab.mt6589:root/fstab.mt6589 \
+	$(LOCAL_PATH)/prebuilt/vold.fstab:system/etc/vold.fstab
 
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/root/ueventd.mt6589.rc:root/ueventd.mt6589.rc \
