@@ -14,6 +14,8 @@
 
 $(call inherit-product-if-exists, vendor/wiko/stairway/stairway-vendor.mk)
 
+DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay/
+
 # prebuilt kernel modules
 MOD_TGT := /system/lib/modules
 MOD_SRC := $(LOCAL_PATH)/prebuilt/modules
@@ -44,7 +46,8 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/root/ueventd.mt6589.rc:root/ueventd.mt6589.rc \
-	$(LOCAL_PATH)/root/init.mt6589.rc:root/init.mt6589.rc
+	$(LOCAL_PATH)/root/init.mt6589.rc:root/init.mt6589.rc \
+	$(LOCAL_PATH)/root/init.mt6589.usb.rc:/root/init.mt6589.usb.rc
 
 PRODUCT_PROPERTY_OVERRIDES := \
 	ro.opengles.version=131072 \
@@ -53,6 +56,17 @@ PRODUCT_PROPERTY_OVERRIDES := \
 	ro.mediatek.chip_ver=S01 \
 	ro.mediatek.version.branch=ALPS.JB2.MP \
 	ro.mediatek.version.sdk=1
+
+PRODUCT_PROPERTY_OVERRIDES := \
+	wifi.interface=wlan0 \
+	wifi.tethering.interface=ap0 \
+	wifi.direct.interface=p2p0 \
+	ro.mediatek.wlan.wsc=1 \
+	ro.mediatek.wlan.p2p=1 \
+	mediatek.wlan.ctia=0 \
+	persist.mtk.wcn.combo.chipid=-1 \
+	mediatek.wlan.chip=MT6628 \
+	mediatek.wlan.module.postfix=_mt6628
 
 PRODUCT_TAGS += dalvik.gc.type-precise
 

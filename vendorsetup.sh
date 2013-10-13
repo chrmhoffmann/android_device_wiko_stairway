@@ -15,3 +15,4 @@
 #
 
 add_lunch_combo full_stairway-userdebug
+add_lunch_combo cm_stairway-userdebug

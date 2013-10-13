@@ -2,4 +2,5 @@
 # system.prop for stairway
 #
 
-ro.sf.lcd_density=160
+ro.sf.lcd_density=320
+persist.sys.usb.config=adb
