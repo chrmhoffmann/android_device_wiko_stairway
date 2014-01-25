@@ -71,12 +71,53 @@ lib/libdpframework_plat.so
 lib/libcutils.so
 lib/libion.so
 
+# lib/libaudiocustparam.so
+# lib/libacdk.so
+# lib/libimageio.so
+# lib/libcamdrv.so
+# lib/libbwc.so
+# lib/libnetutils.so
+# lib/libcam.utils.so
+# lib/libcamera_client.so
+# lib/libaed.so
+# lib/libcameracustom.so
+# lib/liblog.so
+# lib/libcam_camera_exif.so
+# lib/libmatv_cust.so
+# lib/libfeatureio.so
+# lib/libcamalgo.so
+# lib/libmtk_drvb.so
+# lib/lib3a.so
+# lib/libcam.camshot.so
+# lib/libcam.campipe.so
+# lib/libJpgEncPipe.so
+# lib/libjpeg.so
+# lib/libmmfactoryutil.so
+# lib/libaudio.primary.default.so
+# lib/libblisrc.so
+# lib/libspeech_enh_lib.so
+# lib/libaudiosetting.so
+# lib/libaudiocompensationfilter.so
+# lib/libbessound_mtk.so
+# lib/libmedia.so
+# lib/libvcodec_oal.so
+# lib/libvcodec_utility.so
+# lib/libsched.so
+# lib/libmp4enc_xa.ca7.so
+
+bin/wlan_loader
+bin/6620_launcher
+
 bin/nvram_daemon
 bin/nvram_agent_binder
 lib/libnvram.so
 lib/libcustom_nvram.so
 lib/libnvram_daemon_callback.so
+lib/libfile_op.so
+lib/libhwm.so 
 
+bin/wpa_supplicant
+lib/libwapi.so
 
 etc/firmware/mt6628_patch_e2_1_hdr.bin
 etc/firmware/WIFI_RAM_CODE_E6

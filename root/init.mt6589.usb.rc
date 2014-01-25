@@ -15,18 +15,6 @@ on post-fs-data
     write /sys/class/android_usb/android0/f_rndis/manufacturer MediaTek    
     write /sys/class/android_usb/android0/f_rndis/vendorID $sys.usb.vid
 
-# Used to set USB configuration at boot and to switch the configuration
-# when changing the default configuration
-on property:persist.sys.usb.config=*
-    setprop sys.usb.config $persist.sys.usb.config
-
-# Used to disable USB when switching states
-on property:sys.usb.config=none
-    stop adbd
-    write /sys/class/android_usb/android0/enable 0
-    write /sys/class/android_usb/android0/bDeviceClass 0
-    setprop sys.usb.state $sys.usb.config
-
 #1.acm
 on property:sys.usb.config=acm
     write /sys/class/android_usb/android0/enable 0

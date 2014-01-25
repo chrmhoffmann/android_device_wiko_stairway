@@ -206,6 +206,51 @@ on post-fs-data
     chmod 0444 /dev/devmap
     chown root media /dev/devmap
 
+    #/dev/ttyMT2 for 662x_launcher
+    chmod 0660 /dev/ttyMT2
+    chown system system /dev/ttyMT2
+
+    chmod 0660 /dev/ttyMT1
+    chown system system /dev/ttyMT1
+
+    # STP, WMT, GPS, FM and BT Driver
+    insmod /system/lib/modules/mtk_hif_sdio.ko
+    insmod /system/lib/modules/mtk_stp_wmt.ko
+    insmod /system/lib/modules/mtk_stp_uart.ko
+    insmod /system/lib/modules/mtk_stp_gps.ko
+    insmod /system/lib/modules/mtk_stp_bt.ko
+    insmod /system/lib/modules/mtk_fm_drv.ko
+    #insmod /system/lib/modules/mtk_fm_priv.ko
+    insmod /system/lib/modules/mtk_wmt_wifi.ko
+
+    # Create char device file for WMT, GPS, BT, FM, WIFI
+    exec /system/xbin/mknod /dev/stpwmt c 190 0
+    exec /system/xbin/mknod /dev/stpgps c 191 0
+    exec /system/xbin/mknod /dev/stpbt  c 192 0
+    exec /system/xbin/mknod /dev/fm     c 193 0
+    chmod 0660 /dev/stpwmt
+    chown system system /dev/stpwmt
+ 
+    exec /system/xbin/mknod /dev/wmtWifi c 153 0
+    chmod 0666 /dev/wmtWifi
+
+    # BT
+    chmod 0660 /dev/stpbt
+    chown bluetooth radio /dev/stpbt
+
+    # FM Radio device, FIXME: this is not a proper way to set permissions
+    chmod 0666 /dev/fm
+    # GPS
+    chmod 0666 /dev/gps
+    chmod 0660 /dev/stpgps
+
+    # WiFi
+    mkdir /data/misc/wifi 0770 wifi wifi
+    mkdir /data/misc/wifi/sockets 0770 wifi wifi
+    mkdir /data/misc/wpa_supplicant 0770 wifi wifi
+    mkdir /data/misc/dhcp 0770 dhcp dhcp
+    chown dhcp dhcp /data/misc/dhcp
+
     # bluetooth
     mkdir /data/@btmtk 0770 bluetooth net_bt
     chown bluetooth bluetooth /dev/hid-keyboard
@@ -283,20 +328,23 @@ on post-fs-data
     chown system media /dev/mtk_sched
 
     # dhcp
-    mkdir /data/misc/dhcp 0770 dhcp wifi
     chown dhcp wifi /data/misc/dhcp
     chown dhcp dhcp /data/misc/dhcp/dnsmasq.leases
     chown dhcp dhcp /data/misc/dhcp/dnsmasq.p2p0.leases
 
-# Restart adbd so it can run as root
-on property:service.adb.root=1
-    write /sys/class/android_usb/android0/enable 0
-    restart adbd
-    write /sys/class/android_usb/android0/enable 1
-
 # SGX init
 service pvrsrvctl /system/vendor/bin/pvrsrvctl --start
     class main
+    user root
+    group root
+    oneshot
+
+service 662x_launcher /system/bin/logwrapper /system/bin/6620_launcher -b 4000000 -p /system/etc/firmware/ -d /dev/ttyMT2
+    user system
+    group system
+    oneshot
+
+service wlanLoader /system/bin/wlan_loader
     user root
     group root
     oneshot

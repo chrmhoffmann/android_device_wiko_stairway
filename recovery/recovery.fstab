@@ -3,3 +3,4 @@
 /system		ext4		/dev/block/mmcblk0p5
 /sdcard         vfat            /dev/block/mmcblk0p8
 /external_sd    vfat            /dev/block/mmcblk1
+/boot           emmc            /dev/bootimg

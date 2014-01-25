@@ -55,7 +55,9 @@ PRODUCT_PROPERTY_OVERRIDES := \
 	ro.mediatek.platform=MT6589 \
 	ro.mediatek.chip_ver=S01 \
 	ro.mediatek.version.branch=ALPS.JB2.MP \
-	ro.mediatek.version.sdk=1
+	ro.mediatek.version.sdk=1 \
+	ro.sf.lcd_density=320 \
+	persist.sys.usb.config=adb
 
 PRODUCT_PROPERTY_OVERRIDES := \
 	wifi.interface=wlan0 \
