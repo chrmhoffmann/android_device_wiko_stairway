@@ -51,7 +51,7 @@ $(recovery_ramdisk).mtk:  $(MKBOOTIMG) $(recovery_ramdisk).mtk.header
 	cat $(recovery_ramdisk).mtk.header $(recovery_ramdisk) > $@
 
 INTERNAL_MTK_BOOTIMAGE_ARGS := \
-		--kernel $(INSTALLED_KERNEL_TARGET) \
+		--kernel $(INSTALLED_KERNEL_TARGET).mtk \
 		--ramdisk $(INSTALLED_RAMDISK_TARGET).mtk
 
 $(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG)\

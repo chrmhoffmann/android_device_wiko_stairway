@@ -426,8 +426,8 @@ def WriteFullOTAPackage(input_zip, output_zip):
   symlinks = CopySystemFiles(input_zip, output_zip)
   script.MakeSymlinks(symlinks)
 
-  #boot_img = common.GetBootableImage("boot.img", "boot.img",
-  #                                   OPTIONS.input_tmp, "BOOT")
+  boot_img = common.GetBootableImage("boot.img", "boot.img",
+                                     OPTIONS.input_tmp, "BOOT")
   #recovery_img = common.GetBootableImage("recovery.img", "recovery.img",
   #                                       OPTIONS.input_tmp, "RECOVERY")
   #MakeRecoveryPatch(OPTIONS.input_tmp, output_zip, recovery_img, boot_img)
@@ -435,16 +435,16 @@ def WriteFullOTAPackage(input_zip, output_zip):
   Item.GetMetadata(input_zip)
   Item.Get("system").SetPermissions(script)
 
-  #common.CheckSize(boot_img.data, "boot.img", OPTIONS.info_dict)
-  #common.ZipWriteStr(output_zip, "boot.img", boot_img.data)
-  #script.ShowProgress(0.2, 0)
+  common.CheckSize(boot_img.data, "boot.img", OPTIONS.info_dict)
+  common.ZipWriteStr(output_zip, "boot.img", boot_img.data)
+  script.ShowProgress(0.2, 0)
 
-  #if OPTIONS.backuptool:
-  #  script.ShowProgress(0.2, 10)
-  #  script.RunBackup("restore")
+  if OPTIONS.backuptool:
+    script.ShowProgress(0.2, 10)
+    script.RunBackup("restore")
 
-  #script.ShowProgress(0.2, 10)
-  #script.WriteRawImage("/boot", "boot.img")
+  script.ShowProgress(0.2, 10)
+  script.WriteRawImage("/boot", "boot.img")
 
   script.ShowProgress(0.1, 0)
   device_specific.FullOTA_InstallEnd()
@@ -815,6 +815,15 @@ def main(argv):
 
   OPTIONS.target_tmp = OPTIONS.input_tmp
   OPTIONS.info_dict = common.LoadInfoDict(input_zip)
+
+  # If this image was originally labelled with SELinux contexts, make sure we
+  # also apply the labels in our new image. During building, the "file_contexts"
+  # is in the out/ directory tree, but for repacking from target-files.zip it's
+  # in the root directory of the ramdisk.
+  if "selinux_fc" in OPTIONS.info_dict:
+    OPTIONS.info_dict["selinux_fc"] = os.path.join(OPTIONS.input_tmp, "BOOT", "RAMDISK",
+        "file_contexts")
+
   if OPTIONS.verbose:
     print "--- target info ---"
     common.DumpInfoDict(OPTIONS.info_dict)

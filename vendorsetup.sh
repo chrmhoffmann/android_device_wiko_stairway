@@ -14,5 +14,7 @@
 # limitations under the License.
 #
 
-add_lunch_combo full_stairway-userdebug
-add_lunch_combo cm_stairway-userdebug
+for i in eng userdebug user; do
+    add_lunch_combo full_stairway-${i}
+    add_lunch_combo cm_stairway-${i}
+done
