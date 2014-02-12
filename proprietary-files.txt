@@ -108,6 +108,7 @@ lib/libion.so
 bin/hald
 bin/wlan_loader
 bin/6620_launcher
+bin/stp_dump3
 
 bin/nvram_daemon
 bin/nvram_agent_binder

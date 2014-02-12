@@ -48,6 +48,12 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/root/init.modem.rc:root/init.modem.rc \
 	$(LOCAL_PATH)/root/init.mt6589.usb.rc:/root/init.mt6589.usb.rc
 
+PRODUCT_COPY_FILES += \
+	frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
+	frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
+	frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
+	frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml
+
 PRODUCT_PROPERTY_OVERRIDES := \
 	fmradio.driver.chip=3 \
 	gps.solution.combo.chip=1 \

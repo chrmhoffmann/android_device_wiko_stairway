@@ -1,0 +1,4 @@
+#
+# system.prop for stairway
+#
+ro.carrier=wifi-only

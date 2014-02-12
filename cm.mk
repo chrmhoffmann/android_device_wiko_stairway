@@ -14,7 +14,7 @@
 
 # Inherit device configuration
 $(call inherit-product, device/wiko/stairway/full_stairway.mk)
-$(call inherit-product-if-exists, vendor/cm/config/common_full_phone.mk)
+$(call inherit-product, vendor/cm/config/common_full_phone.mk)
 
 # Boot animation
 TARGET_SCREEN_HEIGHT := 1280
