@@ -109,6 +109,14 @@ bin/hald
 bin/wlan_loader
 bin/6620_launcher
 bin/stp_dump3
+bin/ccci_mdinit
+bin/ccci_fsd 
+bin/permission_check
+bin/muxreport 
+bin/rild
+bin/rildmd2
+bin/pppd_dt
+bin/pppd 
 
 bin/nvram_daemon
 bin/nvram_agent_binder
@@ -117,6 +125,8 @@ lib/libcustom_nvram.so
 lib/libnvram_daemon_callback.so
 lib/libfile_op.so
 lib/libhwm.so 
+lib/librilmtk.so
+lib/mtk-ril.so
 
 etc/firmware/mt6628_patch_e2_1_hdr.bin
 etc/firmware/WIFI_RAM_CODE_E6

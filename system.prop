@@ -1,4 +1,2 @@
-#
-# system.prop for stairway
-#
-ro.carrier=wifi-only
+rild.libargs=-d /dev/ttyC0
+

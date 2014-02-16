@@ -1,8 +1,12 @@
-# import init.mt6589.usb.rc
-# import init.modem.rc
+import init.mt6589.usb.rc
+import init.modem.rc
+import init.protect.rc
 
 on early-init
     mount debugfs /sys/kernel/debug /sys/kernel/debug
+
+on boot
+    chown root radio /proc/cmdline
 
 on init  
     export EXTERNAL_STORAGE /storage/sdcard0
@@ -30,6 +34,14 @@ on init
 
 on fs
     mount_all /fstab.mt6589
+    mkdir /protect_f
+    mkdir /protect_s 
+
+    chown system system /protect_f
+    chown system system /protect_s
+    chmod 0771 /protect_f
+    chmod 0771 /protect_s
+
     # SGX
     insmod /system/lib/modules/pvrsrvkm.ko
     insmod /system/lib/modules/mtklfb.ko
@@ -40,6 +52,8 @@ on fs
     chmod 0444 /dev/devmap
     chown root media /dev/devmap
     start pvrsrvctl
+
+    mkdir /dev/radio 0770 radio radio
 
 on post-fs-data
     setprop vold.post_fs_data_done 1
@@ -325,6 +339,9 @@ on post-fs-data
     chown dhcp wifi /data/misc/dhcp
     chown dhcp dhcp /data/misc/dhcp/dnsmasq.leases
     chown dhcp dhcp /data/misc/dhcp/dnsmasq.p2p0.leases
+
+    chown root radio /proc/cmdline
+
 
 # SGX init
 service pvrsrvctl /system/vendor/bin/pvrsrvctl --start
