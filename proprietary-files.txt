@@ -71,7 +71,7 @@ lib/libdpframework_os.so
 lib/libdpframework_plat.so
 lib/libion.so
 
-# lib/libaudiocustparam.so
+lib/libaudiocustparam.so
 # lib/libacdk.so
 # lib/libimageio.so
 # lib/libcamdrv.so
@@ -79,26 +79,26 @@ lib/libion.so
 # lib/libnetutils.so
 # lib/libcam.utils.so
 # lib/libcamera_client.so
-# lib/libaed.so
+lib/libaed.so
 # lib/libcameracustom.so
 # lib/liblog.so
 # lib/libcam_camera_exif.so
 # lib/libmatv_cust.so
 # lib/libfeatureio.so
 # lib/libcamalgo.so
-# lib/libmtk_drvb.so
+lib/libmtk_drvb.so
 # lib/lib3a.so
 # lib/libcam.camshot.so
 # lib/libcam.campipe.so
 # lib/libJpgEncPipe.so
 # lib/libjpeg.so
 # lib/libmmfactoryutil.so
-# lib/libaudio.primary.default.so
-# lib/libblisrc.so
-# lib/libspeech_enh_lib.so
-# lib/libaudiosetting.so
-# lib/libaudiocompensationfilter.so
-# lib/libbessound_mtk.so
+lib/libaudio.primary.default.so
+lib/libblisrc.so
+lib/libspeech_enh_lib.so
+lib/libaudiosetting.so
+lib/libaudiocompensationfilter.so
+lib/libbessound_mtk.so
 # lib/libmedia.so
 # lib/libvcodec_oal.so
 # lib/libvcodec_utility.so
@@ -128,6 +128,22 @@ lib/libhwm.so
 lib/librilmtk.so
 lib/mtk-ril.so
 
+bin/msensord
+bin/ami304d
+bin/memsicd
+bin/akmd8975
+bin/akmd8963
+bin/bmm050d
+bin/orientationd
+bin/geomagneticd
+bin/thermal
+bin/thermal_manager
+
+etc/.tp/.ht120.mtc
+etc/.tp/thermal.conf
+etc/.tp/thermal.off.conf
+etc/throttle.sh
+
 etc/firmware/mt6628_patch_e2_1_hdr.bin
 etc/firmware/WIFI_RAM_CODE_E6
 etc/firmware/mt6628/mt6628_fm_v2_coeff.bin
@@ -151,3 +167,6 @@ etc/firmware/WIFI_RAM_CODE_MT6628
 etc/firmware/catcher_filter.bin
 etc/firmware/WMT.cfg
 etc/firmware/touchpanel/tinno-fts-update-0514.ekt
+etc/audio_policy.conf
+etc/audio_effects.conf
+etc/mtk_omx_core.cfg

@@ -47,7 +47,7 @@ service muxreport-daemon /system/bin/muxreport
     disabled
     oneshot
 
-service ril-daemon /system/bin/logwrapper /system/xbin/strace -s 1024 /system/bin/rild
+service ril-daemon /system/bin/rild
     class core
     socket rild stream 660 root radio
     socket rild2 stream 660 root radio

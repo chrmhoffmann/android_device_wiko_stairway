@@ -248,9 +248,11 @@ on post-fs-data
 
     # FM Radio device, FIXME: this is not a proper way to set permissions
     chmod 0666 /dev/fm
+
     # GPS
     chmod 0666 /dev/gps
     chmod 0660 /dev/stpgps
+    mkdir /data/agps_supl 0771 gps system
 
     # WiFi
     mkdir /data/misc/wifi 0770 wifi wifi
@@ -342,6 +344,27 @@ on post-fs-data
 
     chown root radio /proc/cmdline
 
+    ## Thermal
+    #change permissions on thermal devices
+    chown root system /proc/mtktscpu/mtktscpu
+    chmod 0660 /proc/mtktscpu/mtktscpu
+    chown root system /proc/mtktsbattery/mtktsbattery
+    chmod 0660 /proc/mtktsbattery/mtktsbattery
+    chown root system /proc/mtktspa/mtktspa
+    chmod 0660 /proc/mtktspa/mtktspa
+    chown root system /proc/mtktspmic/mtktspmic
+    chmod 0660 /proc/mtktspmic/mtktspmic
+    chown root system /proc/driver/mtk_thermal_monitor
+    chmod 0660 /proc/driver/mtk_thermal_monitor
+    chown root radio /proc/driver/mtm_scen_call
+    chmod 0660 /proc/driver/mtm_scen_call
+    chown system system /proc/gpufreq/gpufreq_loading_state
+    chmod 0660 /proc/gpufreq/gpufreq_loading_state
+    chown root system /proc/wmt_tm/wmt_tm
+    chown system system /proc/wmt_tm/tm_pid
+    chown system system /proc/wmt_tm/tx_thro
+    chown system system /proc/wmt_tm/wmt_val
+    chown system system /proc/wmt_tm/wfd_stat
 
 # SGX init
 service pvrsrvctl /system/vendor/bin/pvrsrvctl --start
@@ -428,7 +451,6 @@ service ap_daemon /system/bin/wpa_supplicant \
 	disabled
 	oneshot
 
-
 service dhcpcd_wlan0 /system/bin/logwrapper /system/bin/dhcpcd -A -BK -dd
     class main
     disabled
@@ -462,3 +484,54 @@ on property:service.dhcp6c_wlan0.enable=0
 
 on property:service.dhcp6c_wlan0.enable=1
     start dhcp6c_wlan0
+
+# sensor services
+service msensord /system/bin/msensord
+    group system
+    oneshot
+
+service ami304d /system/bin/logwrapper /system/bin/ami304d
+    user system
+    group system
+    disabled
+    oneshot
+
+service memsicd /system/bin/memsicd
+    disabled
+    oneshot
+    user system
+    group system
+
+service akmd8975 /system/bin/akmd8975
+    disabled
+    user system
+    group system
+
+service akmd8963 /system/bin/akmd8963
+    disabled
+    user system
+    group system
+
+service bmm050d /system/bin/bmm050d
+    disabled
+    user system
+    group system
+
+service orientationd /system/bin/orientationd
+    disabled
+    user system
+    group system input
+
+service geomagneticd /system/bin/geomagneticd
+    disabled
+    user system
+    group system input
+
+# thermal
+service thermal_manager /system/bin/thermal_manager
+    user root
+    oneshot
+
+service thermal /system/bin/thermal
+    user system
+    group system
