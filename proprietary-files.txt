@@ -139,6 +139,13 @@ bin/geomagneticd
 bin/thermal
 bin/thermal_manager
 
+bin/mtk_agpsd
+xbin/mnld
+xbin/libmnlp_mt6628
+lib/libssladp.so
+etc/gps.conf
+etc/agps_profiles_conf.xml
+
 etc/.tp/.ht120.mtc
 etc/.tp/thermal.conf
 etc/.tp/thermal.off.conf

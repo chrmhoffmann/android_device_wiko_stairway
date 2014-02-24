@@ -253,6 +253,12 @@ on post-fs-data
     chmod 0666 /dev/gps
     chmod 0660 /dev/stpgps
     mkdir /data/agps_supl 0771 gps system
+    chown gps gps /dev/stpgps
+    chown gps gps /sys/class/gpsdrv/gps/pwrctl
+    chown gps gps /sys/class/gpsdrv/gps/suspend
+    chown gps gps /sys/class/gpsdrv/gps/state
+    chown gps gps /sys/class/gpsdrv/gps/pwrsave
+    chown gps gps /sys/class/gpsdrv/gps/status
 
     # WiFi
     mkdir /data/misc/wifi 0770 wifi wifi
@@ -535,3 +541,16 @@ service thermal_manager /system/bin/thermal_manager
 service thermal /system/bin/thermal
     user system
     group system
+
+# gps
+service agpsd /system/bin/mtk_agpsd
+    class main
+    socket agpsd stream 660 gps system
+    user gps
+    group gps ccci inet sdcard_rw misc
+
+service mnld /system/xbin/mnld
+    user gps
+    group nvram gps inet misc sdcard_rw
+    socket mnld stream 660 gps system
+    disabled
