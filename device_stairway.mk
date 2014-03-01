@@ -56,7 +56,10 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
 	frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
 	frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
-	frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml
+	frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
+	frameworks/native/data/etc/android.hardware.camera.autofocus-flash.xml:system/etc/permissions/android.hardware.camera.autofocus-flash.xml \
+	frameworks/native/data/etc/android.android.hardware.camera.front.xml:system/etc/permissions/android.android.hardware.camera.front.xml
+
 
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/media_codecs.xml:system/etc/media_codecs.xml
@@ -92,10 +95,10 @@ PRODUCT_PROPERTY_OVERRIDES := \
 	ro.mediatek.wlan.wsc=1 \
 	ro.opengles.version=131072 \
 	ro.sf.lcd_density=320 \
-	ro.telephony.ril_class=MediaTekRIL
+	ro.telephony.ril_class=MediaTekRIL \
 	wifi.direct.interface=p2p0 \
 	wifi.interface=wlan0 \
-	wifi.tethering.interface=ap0 \
+	wifi.tethering.interface=ap0
 
 PRODUCT_TAGS += dalvik.gc.type-precise
 
