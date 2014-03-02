@@ -9,16 +9,18 @@ on boot
     chown root radio /proc/cmdline
 
 on init  
+    mkdir /mnt/media_rw/sdcard0 0700 media_rw media_rw
+    mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
+    mkdir /storage/sdcard0 0700 root root
+    mkdir /storage/sdcard1 0700 root root
+
+    symlink /storage/sdcard0 /mnt/emmc
+    symlink /storage/sdcard0 /emmc
+    symlink /storage/sdcard1 /sdcard
+    symlink /storage/sdcard1 /mnt/sdcard
+
     export EXTERNAL_STORAGE /storage/sdcard0
     export SECONDARY_STORAGE /storage/sdcard1
-
-    mkdir /storage/sdcard0 0000 system system
-    mkdir /storage/sdcard1 0000 system system
-
-    symlink /storage/sdcard0 /sdcard0
-    symlink /storage/sdcard0 /mnt/sdcard
-    symlink /storage/sdcard1 /emmc
-    symlink /storage/sdcard1 /mnt/emmc
 
     mkdir /cache 0771 system cache
 
@@ -553,4 +555,15 @@ service mnld /system/xbin/mnld
     user gps
     group nvram gps inet misc sdcard_rw
     socket mnld stream 660 gps system
+    disabled
+
+
+# virtual sdcard daemon running as media_rw (1023)
+service fuse_sdcard0 /system/bin/sdcard -u 1023 -g 1023 /mnt/media_rw/sdcard0 /storage/sdcard0
+    class late_start
+    disabled
+
+# virtual sdcard daemon running as media_rw (1023)
+service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 /mnt/media_rw/sdcard1 /storage/sdcard1
+    class late_start
     disabled

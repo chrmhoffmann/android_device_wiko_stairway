@@ -7,5 +7,7 @@
 /emmc@cache       /cache              ext4      noatime,nosuid,nodev,noauto_da_alloc    wait
 /emmc@usrdata     /data               ext4      noatime,nosuid,nodev,noauto_da_alloc    wait,encryptable=footer
 
-/devices/platform/mtk-msdc.0/mmc_host/mmc0 /storage/sdcard0 auto defaults voldmanaged=sdcard0:8,nonremovable
-/devices/platform/mtk-msdc.1/mmc_host/mmc1 /storage/sdcard1 auto defaults voldmanaged=sdcard1:auto
+/devices/platform/mtk-msdc.0/mmc_host/mmc0 auto auto defaults voldmanaged=sdcard0:8,nonremovable,noemulatedsd
+/devices/platform/mtk-msdc.1/mmc_host/mmc1 auto auto defaults voldmanaged=sdcard1:auto
+
+/dev/bootimg      /boot               emmc      defaults          			defaults

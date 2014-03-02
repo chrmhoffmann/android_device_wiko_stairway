@@ -50,20 +50,20 @@ vendor/lib/libBLPP.so
 vendor/lib/hw/gralloc.mt6589.so
 
 #lib/hw/hwcomposer.mt6589.so
-lib/hw/libaudio.r_submix.default.so
+#lib/hw/libaudio.r_submix.default.so
 lib/hw/gps.default.so
-lib/hw/libaudio.usb.default.so
+#lib/hw/libaudio.usb.default.so
 lib/hw/lights.default.so
 lib/hw/power.default.so
-lib/hw/audio.primary.default.so
-lib/hw/audio_policy.default.so
+#lib/hw/audio.primary.default.so
+#lib/hw/audio_policy.default.so
 lib/hw/local_time.default.so
 lib/hw/camera.default.so
 lib/hw/sensors.default.so
 lib/hw/gralloc.default.so
 lib/hw/keystore.default.so
 lib/libkeystore_client.so
-lib/hw/audio_policy.stub.so
+#lib/hw/audio_policy.stub.so
 
 lib/libm4u.so
 lib/libdpframework.so
@@ -93,7 +93,7 @@ lib/libmtk_drvb.so
 # lib/libJpgEncPipe.so
 # lib/libjpeg.so
 # lib/libmmfactoryutil.so
-lib/libaudio.primary.default.so
+# lib/libaudio.primary.default.so
 lib/libblisrc.so
 lib/libspeech_enh_lib.so
 lib/libaudiosetting.so

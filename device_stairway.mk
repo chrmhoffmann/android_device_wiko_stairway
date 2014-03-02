@@ -92,10 +92,10 @@ PRODUCT_PROPERTY_OVERRIDES := \
 	ro.mediatek.wlan.wsc=1 \
 	ro.opengles.version=131072 \
 	ro.sf.lcd_density=320 \
-	ro.telephony.ril_class=MediaTekRIL
+	ro.telephony.ril_class=MediaTekRIL \
 	wifi.direct.interface=p2p0 \
 	wifi.interface=wlan0 \
-	wifi.tethering.interface=ap0 \
+	wifi.tethering.interface=ap0
 
 PRODUCT_TAGS += dalvik.gc.type-precise
 
