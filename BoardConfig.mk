@@ -45,6 +45,10 @@ TARGET_PREBUILT_KERNEL := $(DEVICE_FOLDER)/prebuilt/kernel
 BOARD_BOOTIMAGE_PARTITION_SIZE := 6291456
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1611661312
 BOARD_USERDATAIMAGE_PARTITION_SIZE:= 4830789632
+# the recovery is still to big, so just did a * 10 to not make the build fail
+# __NEVER__ flash this recovery if the size is > 6M. 
+# Fastboot prevents that, but who knows if people insist.
+# BOARD_RECOVERYIMAGE_PARTITION_SIZE := 6291456
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 62914560
 
 TARGET_USERIMAGES_USE_EXT4 := true
