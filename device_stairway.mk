@@ -104,6 +104,11 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 PRODUCT_PACKAGES += \
 	gsm0710muxd
 
-WIFI_BAND := 802_11_BG
+# wifi
+PRODUCT_PACKAGES += \
+	lib_driver_cmd_mtk
+
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf
 
 $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
