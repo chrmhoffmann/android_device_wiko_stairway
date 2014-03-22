@@ -19,27 +19,23 @@ int wpa_driver_nl80211_driver_cmd(void *priv, char *cmd, char *buf, size_t buf_l
 	struct i802_bss *bss = priv;
 	struct wpa_driver_nl80211_data *drv = bss->drv;
 	struct nl_msg *msg, *cqm = NULL;
-	int ret = 0;
+	int ret = - 1;
 
 	ALOGE("%s: %s", __func__, cmd);
 
 	if (os_strcasecmp(cmd, "start") == 0) {
-		if (linux_set_iface_flags(drv->global->ioctl_sock, 
-					  drv->first_bss.ifname, 1)) {
+		if ((ret = linux_set_iface_flags(drv->global->ioctl_sock,
+						 drv->first_bss.ifname, 1)))
 			ALOGE("nl80211: Could not set interface UP \n");
-		}
+
 		wpa_msg(drv->ctx, MSG_INFO, WPA_EVENT_DRIVER_STATE "STARTED");
 		wpa_printf(MSG_DEBUG,"DRIVER-START: %d", ret);
 	} else if (os_strcasecmp(cmd, "stop") == 0) {
-		if (linux_set_iface_flags(drv->global->ioctl_sock, 
-					  drv->first_bss.ifname, 0)) {
+		if ((ret = linux_set_iface_flags(drv->global->ioctl_sock,
+						 drv->first_bss.ifname, 0)))
 			ALOGE("nl80211: Could not set interface Down \n");
-		}
 		wpa_msg(drv->ctx, MSG_INFO, WPA_EVENT_DRIVER_STATE "STOPPED");
 		wpa_printf(MSG_DEBUG,"DRIVER-STOP: %d", ret);
-	} else if (os_strncasecmp(cmd, "MACADDR", 6) == 0) {
-		ret = snprintf(buf, buf_len, "Macaddr = " MACSTR "\n", MAC2STR(bss->addr));
-		ALOGE("MACADDR");
 	}
 	return ret;
 }
