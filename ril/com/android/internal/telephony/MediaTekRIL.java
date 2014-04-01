@@ -194,7 +194,11 @@ public class MediaTekRIL extends RIL implements CommandsInterface {
 
 
     public MediaTekRIL(Context context, int networkMode, int cdmaSubscription) {
-        super(context, networkMode, cdmaSubscription);
+	    super(context, networkMode, cdmaSubscription, null);
+    }
+
+    public MediaTekRIL(Context context, int networkMode, int cdmaSubscription, Integer instanceId) {
+	    super(context, networkMode, cdmaSubscription, instanceId);
     }
 
     public static byte[] hexStringToBytes(String s) {
@@ -542,5 +546,61 @@ public class MediaTekRIL extends RIL implements CommandsInterface {
 		send(rr);
 	    }
 	}
+    }
+
+    @Override
+    public void
+    setRadioPower(boolean on, Message result) {
+        boolean allow = SystemProperties.getBoolean("persist.ril.enable", true);
+        if (!allow) {
+            return;
+        }
+
+        RILRequest rr = RILRequest.obtain(RIL_REQUEST_DUAL_SIM_MODE_SWITCH, result);
+
+        if (RILJ_LOGD) riljLog(rr.serialString() + "> " + requestToString(rr.mRequest));
+
+        rr.mParcel.writeInt(1);
+        rr.mParcel.writeInt(on ? 3 : 0); // SIM1 | SIM2 ?
+
+        send(rr);
+    }
+
+    @Override
+    public void setUiccSubscription(int slotId, int appIndex, int subId,
+				    int subStatus, Message result) {
+	    if (RILJ_LOGD) riljLog("setUiccSubscription" + slotId + " " + appIndex + " " + subId + " " + subStatus);
+
+	    // Fake response (note: should be sent before mSubscriptionStatusRegistrants or
+	    // SubscriptionManager might not set the readiness correctly)
+	    AsyncResult.forMessage(result, 0, null);
+	    result.sendToTarget();
+
+	    // TODO: Actually turn off/on the radio (and don't fight with the ServiceStateTracker)
+	    if (subStatus == 1 /* ACTIVATE */) {
+		    // Subscription changed: enabled
+		    if (mSubscriptionStatusRegistrants != null) {
+			    mSubscriptionStatusRegistrants.notifyRegistrants(
+									     new AsyncResult (null, new int[] {1}, null));
+		    }
+	    } else if (subStatus == 0 /* DEACTIVATE */) {
+		    // Subscription changed: disabled
+		    if (mSubscriptionStatusRegistrants != null) {
+			    mSubscriptionStatusRegistrants.notifyRegistrants(
+									     new AsyncResult (null, new int[] {0}, null));
+		    }
+	    }
+    }
+
+    public void setDataSubscription(Message result) {
+	    int simId = mInstanceId == null ? 0 : mInstanceId;
+	    if (RILJ_LOGD) riljLog("Setting data subscription to " + simId);
+    }
+
+    public void setDefaultVoiceSub(int subIndex, Message response) {
+	    // No need to inform the RIL on MTK
+	    if (RILJ_LOGD) riljLog("Setting defaultvoice subscription to " + mInstanceId);
+	    AsyncResult.forMessage(response, 0, null);
+	    response.sendToTarget();
     }
 }
