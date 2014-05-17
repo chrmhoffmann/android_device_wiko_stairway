@@ -75,6 +75,7 @@ PRODUCT_PROPERTY_OVERRIDES := \
 	persist.radio.fd.off.counter=5 \
 	persist.radio.fd.off.r8.counter=5 \
 	persist.radio.fd.r8.counter=15 \
+	persist.radio.multisim.config=dsds \
 	persist.sys.usb.config=adb \
 	ril.current.share_modem=2 \
 	ril.external.md=0 \
