@@ -49,7 +49,7 @@ vendor/lib/libpvrANDROID_WSEGL.so
 vendor/lib/libBLPP.so
 vendor/lib/hw/gralloc.mt6589.so
 
-#lib/hw/hwcomposer.mt6589.so
+lib/hw/hwcomposer.mt6589.so
 lib/hw/gps.default.so
 lib/hw/lights.default.so
 lib/hw/power.default.so
