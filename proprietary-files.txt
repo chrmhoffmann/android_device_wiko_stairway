@@ -68,24 +68,26 @@ lib/libion.so
 
 lib/libaudiocustparam.so
 # lib/libacdk.so
-# lib/libimageio.so
-# lib/libcamdrv.so
-# lib/libbwc.so
-# lib/libnetutils.so
-# lib/libcam.utils.so
-# lib/libcamera_client.so
+lib/libimageio.so
+lib/libcamdrv.so
+lib/libbwc.so
+lib/libcam.utils.so
+lib/libcam.paramsmgr.so
 lib/libaed.so
-# lib/libcameracustom.so
-# lib/liblog.so
-# lib/libcam_camera_exif.so
-# lib/libmatv_cust.so
-# lib/libfeatureio.so
-# lib/libcamalgo.so
+lib/libcameracustom.so
+lib/libcam_camera_exif.so
+lib/libmatv_cust.so
+lib/libfeatureio.so
+lib/libcamalgo.so
 lib/libmtk_drvb.so
-# lib/lib3a.so
-# lib/libcam.camshot.so
-# lib/libcam.campipe.so
-# lib/libJpgEncPipe.so
+lib/lib3a.so
+lib/libcam.client.so
+lib/libmpo.so
+lib/libmpoencoder.so
+lib/libcam.camshot.so
+lib/libcam.campipe.so
+lib/libcam.camadapter.so
+lib/libJpgEncPipe.so
 # lib/libjpeg.so
 # lib/libmmfactoryutil.so
 lib/libblisrc.so

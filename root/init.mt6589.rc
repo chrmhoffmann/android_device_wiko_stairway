@@ -305,6 +305,9 @@ on post-fs-data
     chmod 0660 /dev/kd_camera_hw_bus2
     chmod 0660 /dev/FM50AF
     chmod 0660 /dev/CAM_CAL_DRV
+    chmod 0660 /dev/IMX135AF
+    chmod 0660 /dev/IMX091AF
+    chmod 0660 /dev/IMX092AF
 
     chown system camera /dev/camera-sysram
     chown system camera /dev/camera-isp
@@ -314,6 +317,9 @@ on post-fs-data
     chown system camera /dev/kd_camera_hw_bus2
     chown system camera /dev/FM50AF
     chown system camera /dev/CAM_CAL_DRV
+    chown system camera /dev/IMX135AF
+    chown system camera /dev/IMX091AF
+    chown system camera /dev/IMX092AF
 
     #MATV
     chmod 0660 /dev/MATV
@@ -334,11 +340,11 @@ on post-fs-data
     #for eng mode
     chmod 0664 /dev/misc-sd
 
-    chmod 0660 /sys/bus/platform/drivers/mem_bw_ctrl/concurrency_scenario
+    chmod 0666 /sys/bus/platform/drivers/mem_bw_ctrl/concurrency_scenario
     chown system media /sys/bus/platform/drivers/mem_bw_ctrl/concurrency_scenario
 
     # SMI
-    chmod 0660 /dev/MTK_SMI
+    chmod 0666 /dev/MTK_SMI
     chown system media /dev/MTK_SMI
 
     # mtk_sched
