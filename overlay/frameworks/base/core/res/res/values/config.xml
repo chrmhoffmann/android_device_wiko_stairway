@@ -144,4 +144,8 @@
 	<item>255</item>
 	<item>255</item>
     </integer-array>
+
+    <bool name="config_enableTorch">true</bool>
+
+    <integer name="config_deviceHardwareKeys">7</integer>
 </resources>
