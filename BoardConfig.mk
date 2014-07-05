@@ -73,3 +73,6 @@ WIFI_DRIVER_FW_PATH_P2P := "STA+P2P"
 
 # telephony
 BOARD_RIL_CLASS := ../../../device/wiko/stairway/ril/
+
+# allow more than one lun file
+TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/virtual/android_usb/android0/f_mass_storage/lun%d/file"
