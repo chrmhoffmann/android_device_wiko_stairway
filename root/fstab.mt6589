@@ -10,5 +10,8 @@
 /devices/platform/mtk-msdc.0/mmc_host/mmc0 auto auto defaults voldmanaged=sdcard0:8,nonremovable,noemulatedsd
 /devices/platform/mtk-msdc.1/mmc_host/mmc1 auto auto defaults voldmanaged=sdcard1:auto
 
+/devices/platform/mt_usb auto auto defaults voldmanaged=usbdisk0:auto
+
 /dev/bootimg      /boot               emmc      defaults          			defaults
 /dev/recovery     /recovery           emmc      defaults                                defaults
+

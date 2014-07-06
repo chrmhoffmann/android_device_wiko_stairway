@@ -22,6 +22,9 @@ on init
     export EXTERNAL_STORAGE /storage/sdcard0
     export SECONDARY_STORAGE /storage/sdcard1
 
+    mkdir /storage/usbdisk0 0700 root root
+    mkdir /mnt/media_rw/usbdisk0 0700 media_rw media_rw
+
     mkdir /cache 0771 system cache
 
     # Change ION driver permission
@@ -573,7 +576,10 @@ service fuse_sdcard0 /system/bin/sdcard -u 1023 -g 1023 /mnt/media_rw/sdcard0 /s
     class late_start
     disabled
 
-# virtual sdcard daemon running as media_rw (1023)
 service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 /mnt/media_rw/sdcard1 /storage/sdcard1
+    class late_start
+    disabled
+
+service fuse_usbdisk0 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/usbdisk0 /storage/usbdisk0
     class late_start
     disabled
