@@ -111,6 +111,7 @@ PRODUCT_PACKAGES += \
 # audio
 PRODUCT_PACKAGES += \
 	audio.r_submix.default \
+	audio.a2dp.default \
 	libblisrc
 # wifi
 PRODUCT_PACKAGES += \

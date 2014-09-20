@@ -101,6 +101,9 @@ lib/libbessound_mtk.so
 # lib/libsched.so
 # lib/libmp4enc_xa.ca7.so
 
+lib/libbluetoothdrv.so
+lib/libbluetooth_mtk.so
+
 bin/hald
 bin/wlan_loader
 bin/6620_launcher
