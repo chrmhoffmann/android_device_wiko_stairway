@@ -541,7 +541,7 @@ int write_frame(
 #endif
 #endif
 	if (channel != MUXD_VT_CH_NUM)
-		LOGMUX(LOG_INFO, "Sending frame to channel %d", channel);
+		LOGMUX(LOG_DEBUG, "Sending frame to channel %d", channel);
 
 	/* prefix[1]: already set GSM0710_EA=1 and GSM0710_CR bit as 1, Command, let's add address: DLCI */
 	prefix[1] = prefix[1] | ((63 & (unsigned char)channel) << 2);
@@ -619,7 +619,7 @@ int write_frame(
 		}
 
 		if (channel != MUXD_VT_CH_NUM)
-			LOGMUX(LOG_INFO, "Write a frame on channel %d with length %d", channel, length);
+			LOGMUX(LOG_DEBUG, "Write a frame on channel %d with length %d", channel, length);
 	} else { /* cmux_mode */
 		int offs = 1;
 		serial.adv_frame_buf[0] = GSM0710_FRAME_ADV_FLAG;
@@ -897,7 +897,7 @@ static int setup_pty_interface(Channel *channel)
  */
 int pseudo_device_read(void *vargp)
 {
-	LOGMUX(LOG_INFO, "Enter");
+	LOGMUX(LOG_DEBUG, "Enter");
 	Channel *channel = (Channel *)vargp;
 	/* Note by LS: Because the pseudo_device_read() is ivoked due to newly incoming data */
 	/* The buffer size of N_TTY is defined as 4096 in tty.h: The maximum bytes of newly incoming data maybe 4096 */
@@ -1491,7 +1491,7 @@ static GSM0710_Frame *gsm0710_base_buffer_get_frame(GSM0710_Buffer *buf, int pas
 	buf->flag_found = 0; /* prepare for any future frame processing*/
 
 	if (frame->channel != MUXD_VT_CH_NUM)
-		LOGMUX(LOG_INFO, "Get a complete frame. ch:%d, ctrl:%d, len:%d", frame->channel,
+		LOGMUX(LOG_DEBUG, "Get a complete frame. ch:%d, ctrl:%d, len:%d", frame->channel,
 		       frame->control, frame->length);
 	return frame;
 
@@ -3388,7 +3388,7 @@ int main(int argc, char *argv[])
 	while ((main_exit_signal == 0) && ((rc = watchdog(&serial)) == 0)) {
 		/* Monitor and print statistics */
 		//LOGMUX(LOG_INFO, "GSM0710 buffer. Stored %d", gsm0710_buffer_length(serial.in_buf));
-		LOGMUX(LOG_INFO, "Frames received/dropped: %lu/%lu", serial.in_buf->received_count, serial.in_buf->dropped_count);
+		LOGMUX(LOG_DEBUG, "Frames received/dropped: %lu/%lu", serial.in_buf->received_count, serial.in_buf->dropped_count);
 
 		sleep(5);
         
