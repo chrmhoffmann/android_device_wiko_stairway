@@ -7,6 +7,9 @@
 /emmc@cache       /cache              ext4      noatime,nosuid,nodev,noauto_da_alloc    wait
 /emmc@usrdata     /data               ext4      noatime,nosuid,nodev,noauto_da_alloc    wait,encryptable=footer
 
+# cwm hack: access /storage/sdcard0 through emmc to find cmupdater directory
+/dev/block/mmcblk0p8 /emmc            vfat      defaults                                recoveryonly
+
 /devices/platform/mtk-msdc.0/mmc_host/mmc0 auto auto defaults voldmanaged=sdcard0:8,nonremovable,noemulatedsd
 /devices/platform/mtk-msdc.1/mmc_host/mmc1 auto auto defaults voldmanaged=sdcard1:auto
 
