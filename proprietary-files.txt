@@ -104,10 +104,10 @@ lib/libbessound_mtk.so
 lib/libbluetoothdrv.so
 lib/libbluetooth_mtk.so
 
-bin/hald
 bin/wlan_loader
+bin/wmt_loader
 bin/6620_launcher
-bin/stp_dump3
+
 bin/ccci_mdinit
 bin/ccci_fsd 
 bin/permission_check

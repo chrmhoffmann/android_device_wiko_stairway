@@ -19,25 +19,6 @@ DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay/
 # prebuilt kernel modules
 MOD_TGT := /system/lib/modules
 MOD_SRC := $(LOCAL_PATH)/prebuilt/modules
-PRODUCT_COPY_FILES += \
-	$(MOD_SRC)/ccci.ko:$(MOD_TGT)/ccci.ko \
-	$(MOD_SRC)/ccci_plat.ko:$(MOD_TGT)/ccci_plat.ko \
-	$(MOD_SRC)/devapc.ko:$(MOD_TGT)/devapc.ko \
-	$(MOD_SRC)/devinfo.ko:$(MOD_TGT)/devinfo.ko \
-	$(MOD_SRC)/mtk_fm_drv.ko:$(MOD_TGT)/mtk_fm_drv.ko \
-	$(MOD_SRC)/mtk_hif_sdio.ko:$(MOD_TGT)/mtk_hif_sdio.ko \
-	$(MOD_SRC)/mtk_stp_bt.ko:$(MOD_TGT)/mtk_stp_bt.ko \
-	$(MOD_SRC)/mtk_stp_gps.ko:$(MOD_TGT)/mtk_stp_gps.ko \
-	$(MOD_SRC)/mtk_stp_uart.ko:$(MOD_TGT)/mtk_stp_uart.ko \
-	$(MOD_SRC)/mtk_stp_wmt.ko:$(MOD_TGT)/mtk_stp_wmt.ko \
-	$(MOD_SRC)/mtk_wmt_wifi.ko:$(MOD_TGT)/mtk_wmt_wifi.ko \
-	$(MOD_SRC)/mtklfb.ko:$(MOD_TGT)/mtklfb.ko \
-	$(MOD_SRC)/pvrsrvkm.ko:$(MOD_TGT)/pvrsrvkm.ko \
-	$(MOD_SRC)/scsi_tgt.ko:$(MOD_TGT)/scsi_tgt.ko \
-	$(MOD_SRC)/scsi_wait_scan.ko:$(MOD_TGT)/scsi_wait_scan.ko \
-	$(MOD_SRC)/sec.ko:$(MOD_TGT)/sec.ko \
-	$(MOD_SRC)/vcodec_kernel_driver.ko:$(MOD_TGT)/vcodec_kernel_driver.ko \
-	$(MOD_SRC)/wlan_mt6628.ko:$(MOD_TGT)/wlan_mt6628.ko
 
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/root/fstab.mt6589:root/fstab.mt6589
@@ -120,7 +101,9 @@ PRODUCT_PACKAGES += \
 	Torch
 
 PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf
+	$(LOCAL_PATH)/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
+	$(LOCAL_PATH)/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf \
+	$(LOCAL_PATH)/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
 
 $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
 
