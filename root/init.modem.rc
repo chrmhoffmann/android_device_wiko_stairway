@@ -9,9 +9,7 @@ on post-fs-data
     mkdir /data/nvram/md  0770 root nvram
     mkdir /data/nvram/md2 0770 root nvram
 
-    insmod /system/lib/modules/ccci_plat.ko
-    insmod /system/lib/modules/ccci.ko
-    chown ccci ccci /sys/class/BOOT/BOOT/boot/md
+    chown ccci ccci /sys/kernel/ccci/boot
 
     # xplod: this is not in the original mtk file... But I have no
     # idea what kind of sorcery normally sets them
@@ -52,6 +50,7 @@ service ril-daemon /system/bin/rild
     socket rild stream 660 root radio
     socket rild2 stream 660 root radio
     socket rild-debug stream 660 radio system
+    socket rild-oem stream 660 radio system
     socket rild-mtk-ut stream 660 radio net_bt
     socket rild-mtk-ut-2 stream 660 radio net_bt
     socket rild-mtk-modem stream 660 radio system
@@ -65,6 +64,7 @@ service ril-daemon-md2 /system/bin/rildmd2
     socket rild-md2 stream 660 root radio
     socket rild2-md2 stream 660 root radio
     socket rild-debug-md2 stream 660 radio system
+    socket rild-oem-md2 stream 660 radio system
     socket rild-mtk-ut-md2 stream 660 radio net_bt
     socket rild-mtk-ut-2-md2 stream 660 radio net_bt
     socket rild-mtk-modem-md2 stream 660 radio system
