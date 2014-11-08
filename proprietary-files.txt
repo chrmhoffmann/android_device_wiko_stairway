@@ -165,7 +165,7 @@ etc/firmware/mt6628/mt6628_fm_v1_patch.bin
 etc/firmware/mt6628/mt6628_fm_v5_coeff.bin
 etc/firmware/mt6628_ant_m1.cfg
 etc/firmware/mt6628_patch_e2_0_hdr.bin
-etc/firmware/modem.img
+etc/firmware/modem_1_3g_n.img
 etc/firmware/mt6628_patch_e1_hdr.bin
 etc/firmware/WIFI_RAM_CODE
 etc/firmware/S_ANDRO_SFL.ini
