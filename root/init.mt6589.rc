@@ -6,6 +6,7 @@ on early-init
     mount debugfs /sys/kernel/debug /sys/kernel/debug
 
 on boot
+    start drvbd
     chown root radio /proc/cmdline
 
 on init  
@@ -567,6 +568,11 @@ service geomagneticd /system/bin/geomagneticd
     disabled
     user system
     group system input
+
+service drvbd /system/bin/drvbd
+    class main
+    user system
+    group system
 
 # thermal
 service thermal_manager /system/bin/thermal_manager
